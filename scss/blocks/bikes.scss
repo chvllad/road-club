@@ -170,6 +170,7 @@
     overflow: hidden;
 
     @include tablet {
+      overflow: unset;
       display: flex;
       flex-flow: row nowrap;
       gap: 30px;
