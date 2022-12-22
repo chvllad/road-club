@@ -1,0 +1,21 @@
+.page-block {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  &_with-splitter {
+    position: relative;
+
+    &::before {
+      @include pseudo(calc(100% - 36px), 1px);
+      position: absolute;
+      top: 40px;
+      left: 18px;
+      background-color: var(--color-splitter);
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+}

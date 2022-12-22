@@ -1,0 +1,137 @@
+.overview {
+  padding: 40px 18px;
+  display: grid;
+  grid-template:
+    "title"
+    "." 40px
+    "bike"
+    "." 40px
+    "desc"
+    "." 40px
+    "button"
+    / 1fr;
+
+  @include desktop {
+    padding: 0;
+    grid-template:
+      ". .       . .   " 20px
+      ". .       . bike" 63px
+      ". title   . bike"
+      ". .       . bike" 44px
+      ". desc    . bike"
+      ". .       . bike" 53px
+      ". button  . bike"
+      ". caption . bike"
+      ". .       . bike" minmax(0, 1fr)
+      / 120fr minmax(225px, 460fr) 50fr minmax(0, 810fr);
+  }
+
+  &__title {
+    grid-area: title;
+  }
+
+  &__description {
+    grid-area: desc;
+    color: var(--color-text-overview);
+  }
+
+  &__button {
+    text-decoration: none;
+    min-height: 46px;
+    width: 100%;
+    border-radius: 4px;
+    grid-area: button;
+    font: 600 13px/19px var(--font);
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--color-button-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include green-background;
+    &:hover {
+      @include green-background-hover;
+    }
+    @include tablet {
+      max-width: 180px;
+      min-height: 50px;
+      font: 600 14px/18px var(--font);
+    }
+  }
+
+  &__bike {
+    @include reset;
+    grid-area: bike;
+    display: grid;
+    grid-template: "bike" 1fr / 1fr;
+
+    @include desktop {
+      display: contents;
+    }
+
+    &::before {
+      grid-area: bike;
+      justify-self: end;
+      @include pseudo(calc(89.4%), 100%);
+      aspect-ratio: 254 / 348;
+      max-width: 610px;
+      background-image: url("../images/ov-bg.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  &__bike-image-wrap {
+    grid-area: bike;
+    aspect-ratio: 22 / 15;
+    min-width: 234px;
+    width: 60%;
+    max-width: 440px;
+    position: sticky;
+    top: 330px;
+    display: grid;
+    grid-template: "data" 1fr / 1fr;
+    background-color: var(--color-card-background);
+    box-shadow: var(--shadow-overview-card);
+    border-radius: 20px;
+    margin-bottom: 30px;
+
+    @include tablet {
+      top: 500px;
+      margin-bottom: 79px;
+    }
+
+    @include desktop {
+      top: 421px;
+      margin-bottom: 79px;
+    }
+  }
+
+  &__bike-image {
+    grid-area: data;
+    align-self: center;
+    justify-self: center;
+    width: 77.28%;
+    height: 90.9%;
+    box-sizing: border-box;
+    display: block;
+  }
+
+  &__bike-caption {
+    display: none;
+    font: 400 18px/18px var(--font);
+    @include desktop {
+      padding: 36.7% 0 45%;
+      display: block;
+      grid-area: caption;
+      display: grid;
+      grid-template: ". . dash ." / auto 30px 132px 1fr;
+      align-items: center;
+      &::after {
+        @include pseudo(100%, 2px);
+        grid-area: dash;
+        background-color: var(--color-name-line);
+      }
+    }
+  }
+}

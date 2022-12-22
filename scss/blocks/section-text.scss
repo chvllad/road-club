@@ -1,0 +1,9 @@
+.section-text {
+  @include reset;
+  font: 400 12px/18px var(--font);
+  color: var(--color-text-dim);
+
+  @include desktop {
+    font: 400 18px/28px var(--font);
+  }
+}

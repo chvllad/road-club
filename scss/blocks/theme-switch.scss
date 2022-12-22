@@ -1,0 +1,47 @@
+.theme-switch {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 22px;
+
+  &::before {
+    @include pseudo(28px, 28px);
+    background-color: var(--color-button-switch-icons);
+    mask-image: url("../images/icons/sun.svg");
+  }
+
+  &__button {
+    @include reset-button;
+    background-color: var(--color-button-switch-background);
+    border-radius: 9999px;
+    width: 44px;
+    height: 24px;
+    display: grid;
+    grid-template: "circle ." / auto 1fr;
+    padding: 2px;
+
+    &_pressed::before {
+      transform: translateX(20px);
+    }
+
+    &::before {
+      @include pseudo(20px, 20px);
+      @include green-background(transform);
+      grid-area: circle;
+      border-radius: 9999px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      &::before {
+        @include green-background-hover;
+      }
+    }
+  }
+
+  &::after {
+    @include pseudo(20px, 20px);
+    background-color: var(--color-button-switch-icons);
+    mask-image: url("../images/icons/moon.svg");
+  }
+}

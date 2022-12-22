@@ -1,0 +1,9 @@
+.section-title {
+  @include reset;
+  font: 700 32px/40px var(--font);
+  letter-spacing: -0.5px;
+
+  @include desktop {
+    font: 700 55px/60px var(--font);
+  }
+}

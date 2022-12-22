@@ -1,0 +1,21 @@
+@keyframes hide-slide {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-right {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-left {
+  100% {
+    transform: translateX(-100%);
+  }
+}

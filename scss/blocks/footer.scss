@@ -1,0 +1,141 @@
+.footer {
+  width: 100%;
+  background-color: var(--color-footer-background);
+  padding: 61px 16px 16px 18px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template:
+    "title title title"
+    ". . ." 40px
+    "form form form"
+    ". . ." 90px
+    "copyright . logo"
+    / auto minmax(32px, 1fr) auto;
+
+  @include tablet {
+    padding: 80px 0 60px 0;
+    grid-template:
+      ". . title     title title . ."
+      ". . .         .     .     . ." 50px
+      ". . form      form  form  . ."
+      ". . .         .     .     . ." 86px
+      ". . copyright .     theme . ."
+      / minmax(0, calc((100vw - $max-width) / 2)) 120fr 133px 929fr 140px 118fr minmax(0, calc((100vw - $max-width) / 2));
+  }
+
+  &__title {
+    @include reset;
+    grid-area: title;
+    max-width: 280px;
+    font: 600 24px/32px var(--font);
+  }
+
+  &__form {
+    grid-area: form;
+    margin-right: 2px;
+    max-width: 360px;
+    font: 500 13px/28px var(--font);
+    display: grid;
+    grid-template: "data" / 1fr;
+
+    &_visible-message {
+      &>.footer__input::placeholder {
+        opacity: 0;
+      }
+
+      &::after {
+        content: attr(data-message);
+        grid-area: data;
+        font: inherit;
+        align-self: center;
+        padding-left: 20px;
+      }
+    }
+  }
+
+  &__input {
+    grid-area: data;
+    width: 100%;
+    color: var(--color-text-main);
+    font: inherit;
+    background-color: inherit;
+    border: 1px solid var(--color-input-border);
+    border-radius: 4px;
+    outline: none;
+    padding: 0 60px 0 20px;
+    height: 50px;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: var(--color-input-placeholder);
+      font: inherit;
+    }
+
+    &:hover::placeholder {
+      color: inherit;
+    }
+
+    &:focus {
+      border-color: var(--color-input-border-focus);
+
+      &::placeholder {
+        color: transparent;
+      }
+    }
+  }
+
+  &__submit {
+    @include reset-button;
+    background-color: transparent;
+    grid-area: data;
+    justify-self: end;
+    align-self: center;
+    padding: 0 22px;
+    box-sizing: border-box;
+    height: 100%;
+    font: inherit;
+    opacity: 0;
+    pointer-events: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__form:focus-within > &__submit,
+  &__input:not(:placeholder-shown) + &__submit {
+    opacity: 1;
+    pointer-events: unset;
+  }
+
+  &__theme {
+    display: none;
+
+    @include tablet {
+      display: flex;
+      grid-area: theme;
+      margin-bottom: 6px;
+    }
+  }
+
+  &__copyright {
+    @include reset;
+    grid-area: copyright;
+    align-self: center;
+    color: var(--color-text-copyright);
+    font: 500 14px/20px var(--font);
+
+    @include tablet {
+      align-self: end;
+    }
+  }
+
+  &::after {
+    @include pseudo(38px, 38px);
+    grid-area: logo;
+    background-color: var(--color-text-main);
+    mask-image: url("../images/icons/logo.svg");
+
+    @include only-mobile;
+  }
+}
