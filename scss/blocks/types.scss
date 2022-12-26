@@ -1,0 +1,179 @@
+.types {
+  padding: 82px 16px 0;
+  display: grid;
+  grid-template:
+    [line-start] ". .    . .    ." 7px
+                 ". prev . next ." 24px
+                 ". .    . .    ." 1fr [line-end]
+    / [col-start] 1fr 24px 10px 24px 2px [col-end];
+  overflow-x: hidden;
+
+
+  @include tablet {
+    padding: 63px 0;
+    grid-template:
+      [line-start] ". .    . .    ." 1fr [line-end]
+                   ". .    . .    ." 50px
+                   ". prev . next ." 50px
+      / 120fr [col-start] 50px 20px 50px 1200fr [col-end];
+  }
+
+  &__next,
+  &__prev {
+    @include reset-button;
+    @include hover-animation(opacity);
+    z-index: 1;
+    border-radius: 30px;
+    background-color: var(--color-arrow-btn-background);
+    &::after {
+      @include pseudo(100%, 100%);
+      background-color: var(--color-arrow-btn-arrow);
+      mask-image: url("../images/icons/prev.svg");
+      mask-repeat: no-repeat;
+      mask-size: auto 48%;
+      mask-position: left 46.5% bottom 52%;
+    }
+  }
+
+  &__next:hover,
+  &__prev:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  &__prev {
+    grid-area: prev;
+  }
+
+  &__next {
+    grid-area: next;
+    transform: scaleX(-1);
+  }
+
+  &__list {
+    @include reset-list;
+    grid-area: line-start / col-start / line-end / col-end;
+    overflow-x: scroll;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include tablet {
+      margin-right: -60px;
+      grid-auto-columns: calc(50%);
+    }
+  }
+
+  &__item {
+    padding: 0 2px;
+    display: grid;
+    grid-template:
+      "title   title .   "
+      ".       .     .   " 40px
+      [image-row-begin] ". . ."
+      "sticker .     .   " 28px
+      ".       .     .   " 15px [image-row-end]
+      ".       .     .   " 40px
+      "desc    desc  desc"
+      ".       .     .   " minmax(40px, 1fr)
+      / [image-col-begin] 70px 1fr 68px [image-col-end];
+
+    &:last-child {
+      margin-right: 1px;
+    }
+
+    &::before {
+      @include pseudo(100%, 100%);
+      grid-area: sticker;
+      background-color: var(--color-button);
+      mask-image: url("../images/icons/sticker.svg");
+      mask-repeat: no-repeat;
+      mask-size: 100%;
+      z-index: 1;
+      transition: opacity 0.2s linear;
+      opacity: 0;
+    }
+
+    &::after {
+      @include pseudo(100%, 100%);
+      grid-area: sticker;
+      background-color: var(--color-button-text);
+      mask-repeat: no-repeat;
+      mask-size: 50% auto;
+      z-index: 2;
+      transition: opacity 0.2s linear;
+      opacity: 0;
+    }
+
+    &_type_highway::after {
+      mask-image: url("../images/icons/highway.svg");
+      mask-position: left 32% bottom 50%;
+    }
+
+    &_type_gravel::after {
+      mask-image: url("../images/icons/gravel.svg");
+      mask-position: left 32% bottom 33.8%;
+    }
+
+    &_type_tt::after {
+      mask-image: url("../images/icons/tt.svg");
+      mask-position: left 32% bottom 31.6%;
+    }
+
+    &_visible {
+      &::before,
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    @include tablet {
+      padding: 0 40px 0 0;
+      grid-template:
+        "title   title .   "
+        ".       .     .   " 45px
+        "desc    desc  desc"
+        ".       .     .   " minmax(82px, 1fr)
+        [image-row-begin] ". . ."
+        "sticker .     .   " 40px
+        ".       .     .   " 16px [image-row-end]
+        / [image-col-begin] 100px 1fr 68px [image-col-end];
+    }
+  }
+
+  &__article {
+    display: contents;
+  }
+
+  &__title {
+    grid-area: title;
+    transition: opacity 0.2s linear;
+    opacity: 0;
+  }
+
+  &__item_visible &__title {
+    opacity: 1;
+  }
+
+  &__description {
+    grid-area: desc;
+    max-width: 460px;
+    transition: opacity 0.2s linear;
+    opacity: 0;
+  }
+
+  &__item_visible &__description {
+    opacity: 1;
+  }
+
+  &__image {
+    grid-area: image-row-begin / image-col-begin / image-row-end / image-col-end;
+    width: 100%;
+    object-fit: cover;
+  }
+}

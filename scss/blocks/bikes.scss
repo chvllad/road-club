@@ -1,0 +1,323 @@
+.bikes {
+  padding: 80px 18px 38px;
+
+  display: grid;
+  grid-template:
+    "title  title"
+    ".      .    " 40px
+    "types  .    "
+    ".      .    " 20px
+    "cards  cards"
+    / auto 1fr;
+
+  @include tablet {
+    padding: 60px 0;
+    grid-template:
+      ". title .     types ."
+      ". .     .     .     ." 117px
+      ". cards cards cards ."
+      / 120fr 460fr 513fr auto 120fr;
+  }
+
+  &__title {
+    grid-area: title;
+  }
+
+  &__types-wrap {
+    grid-area: types;
+    align-self: end;
+    position: relative;
+    border: 1px solid var(--color-splitter);
+    border-radius: 2px;
+    display: grid;
+    min-height: 30px;
+    min-width: 114px;
+    padding-right: 30px;
+    box-sizing: border-box;
+    grid-template: "." 1fr / 1fr;
+    cursor: pointer;
+
+    &::after {
+      @include pseudo(30px, 100%);
+      cursor: pointer;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      z-index: 4;
+
+      background-color: var(--color-text-main);
+      mask-image: url("../images/icons/down.svg");
+      mask-repeat: no-repeat;
+      mask-size: 10px auto;
+      mask-position: center;
+      @include hover-animation(opacity);
+    }
+
+    &:hover::after {
+      opacity: 0.75;
+    }
+
+    @include tablet {
+      margin-bottom: 7px;
+      cursor: unset;
+      min-height: unset;
+      min-width: unset;
+      padding: 0;
+      border: unset;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &__types-list {
+    @include reset-list;
+    display: grid;
+    grid-template: "data" 1fr / 1fr;
+
+    @include tablet {
+      display: flex;
+      gap: 40px;
+      flex-flow: row nowrap;
+    }
+  }
+
+  &__types-wrap:hover > &__types-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    z-index: 3;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    @include tablet {
+      position: static;
+      flex-flow: row nowrap;
+    }
+  }
+
+  &__types-item {
+    @include reset;
+    cursor: pointer;
+    width: 100%;
+    background-color: var(--color-background);
+    color: var(--color-text-dim);
+    padding: 7px 12px;
+    font: 600 11px/14px var(--font);
+    grid-area: data;
+    z-index: 0;
+    order: 1;
+    @include hover-animation(opacity);
+
+    &:hover {
+      color: var(--color-text-dim-hover);
+    }
+
+    &_active {
+      cursor: inherit;
+      z-index: 1;
+      order: 0;
+      color: var(--color-text-main);
+
+      &:hover {
+        color: var(--color-text-main);
+      }
+    }
+
+    @include tablet {
+      order: 0;
+      padding: 0;
+      width: unset;
+    }
+
+    @include desktop {
+      font: 600 18px/26px var(--font);
+    }
+  }
+
+  &__types-button {
+    @include reset-button;
+    font: inherit;
+    color: inherit;
+    cursor: inherit;
+    background-color: transparent;
+  }
+
+  &__carousel {
+    grid-area: cards;
+    display: grid;
+    grid-template:
+      "list"
+      ".   " 20px
+      "dots"
+      / 1fr;
+
+    @include tablet {
+      grid-template: "list" 1fr / 1fr;
+    }
+  }
+
+  &__list {
+    @include reset-list;
+    grid-area: list;
+    display: grid;
+    grid-template: "data" 1fr / 1fr;
+    overflow: hidden;
+
+    @include tablet {
+      overflow: unset;
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 30px;
+    }
+  }
+
+  &__item {
+    @include reset;
+    display: contents;
+  }
+
+  &__link {
+    grid-area: data;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+
+    visibility: hidden;
+
+    animation-duration: 0.7s;
+    animation-fill-mode: none;
+    animation-timing-function: ease;
+
+    display: grid;
+    grid-template:
+    [bg-row-start] ". .     ." 14.95px
+                   ". image ."
+                   ". .     ." 2.95px
+                   ". text  ."
+                   ". .     ." 16px [bg-row-end]
+      / [bg-col-start] 1495fr 25411fr 1495fr [bg-col-end];
+
+    &_active {
+      visibility: visible;
+    }
+
+    &::before {
+      @include pseudo(100%, 100%);
+      grid-area: bg-row-start / bg-col-start / bg-row-end / bg-col-end;
+      background-color: var(--color-card-background);
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
+    }
+
+    &:hover::before {
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    &_animation {
+      &_hide,
+      &_slide-left,
+      &_slide-right {
+        visibility: visible;
+        z-index: 1;
+        &::before {
+          box-shadow: none;
+        }
+      }
+      &_hide {
+        animation-name: hide-slide;
+      }
+      &_slide-left {
+        animation-name: slide-left;
+      }
+      &_slide-right {
+        animation-name: slide-right;
+      }
+    }
+
+    @include tablet {
+      visibility: visible;
+
+      grid-template:
+        [bg-row-start] ".    .     .   " 20px
+                       ".    image .   "
+                       ".    .     .   " 20px [bg-row-end]
+                       ".    .     .   " 22px
+                       "text text  text" 1fr
+        / [bg-col-start] 20px 1fr 20px [bg-col-end];
+
+      &_animation {
+        &_hide,
+        &_slide-right,
+        &_slide-left {
+          animation-name: none;
+        }
+      }
+    }
+  }
+
+  &__card {
+    display: contents;
+  }
+
+  &__image {
+    grid-area: image;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  &__name {
+    @include reset;
+    grid-area: text;
+    font: 600 14px/18px var(--font);
+    color: var(--color-card-text);
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+
+    @include tablet {
+      margin-left: 6px;
+      justify-self: start;
+    }
+
+    @include desktop {
+      font: 600 18px/22px var(--font);
+    }
+  }
+
+  &__dots {
+    grid-area: dots;
+    justify-self: center;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 5px;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--color-carousel-dot);
+    cursor: pointer;
+    @include hover-animation(opacity);
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &_active {
+      cursor: unset;
+      background-color: var(--color-text-main);
+    }
+  }
+}

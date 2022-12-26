@@ -1,0 +1,22 @@
+{
+  "extends": ["airbnb-base"],
+  "env": {
+    "browser": true,
+    "node": false,
+    "es6": true
+  },
+  "rules": {
+    "import/extensions": [2, "always"]
+  },
+  "overrides": [{
+    "files": ["build/*.js"],
+    "rules": {
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+      "no-console": "off"
+    },
+    "env": {
+      "node": true,
+      "browser": false
+    }
+  }]
+}

@@ -1,0 +1,68 @@
+.quote {
+  padding: 60px 18px 41px;
+  display: grid;
+  grid-template:
+    "image"
+    "." 40px
+    "quote"
+    "." 38px
+    "author"
+    "." 4px
+    "about";
+
+    @include tablet {
+      padding: 120px 0 60px;
+      grid-template:
+        ". image . quote  ."
+        ". image . .      ." minmax(50px, 1fr)
+        ". image . author ."
+        ". image . .      ." 7px
+        ". image . about  ."
+        ". image . .      ." 3px
+        / 120fr 650fr 80fr 470fr 120fr;
+    }
+
+    &__image {
+      grid-area: image;
+      object-fit: cover;
+      width: 100%;
+      display: block;
+      align-self: center;
+      aspect-ratio: 284 / 204;
+      @include tablet {
+        aspect-ratio: 65 / 46;
+      }
+    }
+
+    &__text {
+      @include reset;
+      grid-area: quote;
+      font: 600 23px/29px var(--font);
+      letter-spacing: -0.5px;
+
+      @include desktop {
+        font: 600 34px/44px var(--font);
+      }
+    }
+
+    &__author {
+      @include reset;
+      grid-area: author;
+      font: 500 14px/22px var(--font);
+
+      @include desktop {
+        font: 500 20px/32px var(--font);
+      }
+    }
+
+    &__about-author {
+      @include reset;
+      grid-area: about;
+      font: 400 10px/16px var(--font);
+      color: var(--color-text-dim);
+
+      @include desktop {
+        font: 400 16px/28px var(--font);
+      }
+    }
+}

@@ -1,0 +1,74 @@
+.training {
+  padding: 81px 18px 60px;
+  display: grid;
+  grid-template:
+    "title"
+    "." 40px
+    "image"
+    "." 40px
+    "desc"
+    "." 40px
+    "links";
+
+  @include tablet {
+      padding: 150px 0 120px;
+      grid-template:
+        ". title . image ."
+        ". .     . image ." 45px
+        ". desc  . image ."
+        ". .     . image ." minmax(50px, 1fr)
+        ". links . image ."
+        / 120fr 460fr 160fr 580fr 120fr;
+    }
+
+  &__title {
+    grid-area: title;
+
+    @include desktop {
+      margin-top: 3px;
+    }
+  }
+
+  &__image {
+    grid-area: image;
+    align-self: center;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__description {
+    grid-area: desc;
+  }
+
+  &__links {
+    @include reset-list;
+    grid-area: links;
+    font: 600 14px/20px var(--font);
+    display: flex;
+    flex-flow: row wrap;
+    gap: 30px;
+
+    @include desktop {
+      font: 600 18px/28px var(--font);
+    }
+  }
+
+  &__item {
+    display: contents;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: var(--color-text-main);
+
+    @include hover-animation(color);
+
+    &:hover {
+      color: var(--color-text-main-hover);
+    }
+
+    @include desktop {
+      margin-bottom: 4px;
+    }
+  }
+}

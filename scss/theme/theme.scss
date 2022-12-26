@@ -1,0 +1,67 @@
+:root {
+  color-scheme: only light;
+
+  --font: Inter, sans-serif;
+
+  --color-button: #24B47E;
+  --color-button-hover: #319E75;
+  --color-button-text: #fff;
+  --color-card-background: #f4f4f4;
+  --shadow-overview-card: -20px 60px 220px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0px 20px 140px rgba(0, 0, 0, 0.06);
+
+  --shadow-card-hover: 0px 20px 140px rgba(0, 0, 0, 0.11);
+
+  --color-background: #f4f4f4;
+  --color-footer-background: #efefef;
+  --color-splitter: #e3e3e3;
+  --color-text-main: #151515;
+  --color-text-main-hover: rgba(21 21 21 / 75%);
+  --color-text-overview: rgba(34 34 34 / 70%);
+  --color-text-dim: rgba(34 34 34 / 70%);
+  --color-text-dim-hover: rgba(34 34 34 / 60%);
+  --color-text-copyright: #cfcfcf;
+  --color-arrow-btn-background: #ebebeb;
+  --color-arrow-btn-arrow: #151515;
+  --color-card-shadow-hover: rgba(0 0 0 / 11%);
+  --color-input-placeholder: rgba(34 34 34 / 70%);
+  --color-input-border: rgba(199 199 199 / 50%);
+  --color-input-border-focus: #c7c7c7;
+  --color-button-switch-background: #fff;
+  --color-button-switch-icons: #cfcfcf;
+  --color-name-line: #d7d4d4;
+  --color-carousel-dot: #cacaca;
+
+  --color-card-text: #151515;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: only dark;
+
+  --shadow-card-hover: 0px 20px 140px rgba(0, 0, 0, 0.55);
+
+  --color-background: #333;
+  --color-footer-background: #2f2f2f;
+  --color-splitter: #323232; // В макете не было, пришлось самому подбирать
+  --color-text-main: #fff;
+  --color-text-main-hover: rgba(255 255 255 / 65%);
+  --color-text-overview: rgba(230 230 230 / 70%);
+  --color-text-dim: rgba(229 229 229 / 70%);
+  --color-text-dim-hover: rgba(229 229 229 / 50%);
+  --color-text-copyright: #565656;
+  --color-arrow-btn-background: #434343;
+  --color-arrow-btn-arrow: #fff;
+  --color-card-shadow-hover: rgba(0 0 0 / 55%);
+  --color-input-placeholder: rgba(255 255 255 / 70%);
+  --color-input-border: rgba(125 125 125 / 50%);
+  --color-input-border-focus: #7d7d7d;
+  --color-button-switch-background: #545454;
+  --color-button-switch-icons: #676767;
+  --color-name-line: #707070;
+  --color-carousel-dot: #6c6c6c;
+
+  --color-card-text: #151515;
+  @include tablet {
+    --color-card-text: var(--color-text-main);
+  }
+}

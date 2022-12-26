@@ -1,0 +1,32 @@
+{
+  "name": "bicycles",
+  "description": "",
+  "version": "1.0.0",
+  "author": "Cherepita Vladislav",
+  "license": "Apache-2.0",
+  "type": "module",
+  "browserslist": [
+    "last 2 versions",
+    "> 1%"
+  ],
+  "scripts": {
+    "stylelint": "stylelint --config \"./.stylelintrc.json\" \"scss/**/*.css\"",
+    "eslint": "eslint --config \"./.eslintrc.json\" \"scripts/**/*.js\"",
+    "watch": "node build/esbuild_watch.js",
+    "build": "node build/esbuild.js"
+  },
+  "devDependencies": {
+    "@compodoc/live-server": "^1.2.3",
+    "autoprefixer": "^10.4.13",
+    "esbuild": "^0.16.7",
+    "esbuild-sass-plugin": "^2.4.3",
+    "eslint": "^8.29.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "fs-extra": "^11.1.0",
+    "postcss": "^8.4.20",
+    "stylelint": "^14.16.0",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "stylelint-scss": "^4.3.0"
+  }
+}

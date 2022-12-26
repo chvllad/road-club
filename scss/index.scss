@@ -1,0 +1,23 @@
+@import "vendor/normalize.css";
+@import "vendor/fonts.scss";
+
+@import "variables/variables.scss";
+@import "mixins/mixins.scss";
+
+@import "vendor/animations.scss";
+@import "theme/theme.scss";
+
+@import "blocks/theme-switch.scss";
+@import "blocks/page-block.scss";
+@import "blocks/section-title.scss";
+@import "blocks/section-text.scss";
+
+@import "blocks/page.scss";
+@import "blocks/header.scss";
+@import "blocks/main.scss";
+@import "blocks/overview.scss";
+@import "blocks/quote.scss";
+@import "blocks/types.scss";
+@import "blocks/bikes.scss";
+@import "blocks/training.scss";
+@import "blocks/footer.scss";

@@ -1,0 +1,72 @@
+@use "sass:list";
+
+@mixin reset() {
+  padding: 0;
+  margin: 0;
+}
+
+@mixin reset-list() {
+  @include reset;
+  list-style: none;
+}
+
+@mixin reset-button() {
+  @include reset;
+  border: none;
+}
+
+@mixin hover-animation($prop-names...) {
+  $values: null;
+  @each $prop-name in $prop-names {
+    $values: list.append($values, $prop-name 0.2s ease, $separator: comma);
+  }
+  transition: $values;
+}
+
+@mixin pseudo($width, $height) {
+  content: "";
+  display: block;
+  width: $width;
+  height: $height;
+}
+
+@mixin only-mobile() {
+  @media (min-width: $mobile-width) {
+    display: none;
+  }
+}
+
+@mixin tablet() {
+  @media (min-width: $mobile-width) {
+    @content();
+  }
+}
+
+@mixin desktop() {
+  @media (min-width: $tablet-width) {
+    @content();
+  }
+}
+
+@mixin green-background($anim-prop-names...) {
+  background-image: linear-gradient(to right, var(--color-button-hover) 0%, var(--color-button-hover) 50%, var(--color-button) 50%, var(--color-button) 100%);
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position-x: 100%;
+  @include hover-animation(background, $anim-prop-names...)
+}
+
+@mixin green-background-hover() {
+  background-position-x: 0;
+}
+
+@mixin o75-hover() {
+  & {
+    background-color: var(--color-text-main);
+    cursor: pointer;
+    @include hover-animation(opacity);
+  }
+  &:hover {
+    opacity: 0.75;
+  }
+}
